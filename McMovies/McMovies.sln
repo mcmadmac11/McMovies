@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E256743E-C3E9-40BE-91D3-03BD355834F1}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\GitHub\McMovies\global.json = ..\..\GitHub\McMovies\global.json
+		Info.txt = Info.txt
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "McMovies", "..\..\GitHub\McMovies\src\McMovies\McMovies.xproj", "{3974958B-3409-4365-B6C7-B739661DF5E9}"
