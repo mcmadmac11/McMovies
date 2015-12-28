@@ -4,6 +4,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using McMovies.Models;
 using System.Xml.Linq;
+using System;
 
 namespace McMovies.Controllers
 {
@@ -17,9 +18,17 @@ namespace McMovies.Controllers
         }
 
         // GET: McMovies
-        public IActionResult Index()
+        public IActionResult Index(string SearchString)
         {
-            return View(_context.McMovie.ToList());
+            var movies = from m in _context.McMovie
+                         select m;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                movies = movies.Where(s => s.Title.Contains(SearchString));
+            }
+
+            return View(movies);
         }
 
         // GET: McMovies/Details/5
