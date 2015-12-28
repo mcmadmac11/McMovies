@@ -5,6 +5,7 @@ using Microsoft.Data.Entity;
 using McMovies.Models;
 using System.Xml.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace McMovies.Controllers
 {
@@ -18,14 +19,27 @@ namespace McMovies.Controllers
         }
 
         // GET: McMovies
-        public IActionResult Index(string SearchString)
+        public IActionResult Index(string movieActor, string SearchString)
         {
+            var ActorQry = from m in _context.McMovie
+                           orderby m.Cast
+                           select m.Cast;
+
+            var ActorList = new List<string>();
+            ActorList.AddRange(ActorQry.Distinct());
+            ViewData["movieActor"] = new SelectList(ActorList);
+
             var movies = from m in _context.McMovie
                          select m;
 
             if (!String.IsNullOrEmpty(SearchString))
             {
                 movies = movies.Where(s => s.Title.Contains(SearchString));
+            }
+
+            if (!String.IsNullOrEmpty(movieActor))
+            {
+                movies = movies.Where(x => x.Cast == movieActor);
             }
 
             return View(movies);
@@ -58,7 +72,7 @@ namespace McMovies.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(
-            [Bind("ID,Title,ReleaseDate,Cast,RunTime,Review")]McMovie movie)
+            [Bind("ID,Title,ReleaseDate,Cast,RunTime,Review,Rating")]McMovie movie)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +103,7 @@ namespace McMovies.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(
-            [Bind("ID,Title,ReleaseDate,Cast,RunTime,Review")]McMovie movie)
+            [Bind("ID,Title,ReleaseDate,Cast,RunTime,Review,Rating")]McMovie movie)
         {
             if (ModelState.IsValid)
             {

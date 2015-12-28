@@ -29,7 +29,8 @@ namespace McMovies.Models
                     ReleaseDate = DateTime.Parse("2014-11-14"),
                     Review = "Better than expected",
                     RunTime = "1 hr. 49 min",
-                    Title = "Dumb & Dumber To"
+                    Title = "Dumb & Dumber To",
+                    Rating = "R"
                 }
 
             );
