@@ -25,7 +25,6 @@ namespace McMovies
 
             if (env.IsDevelopment())
             {
-                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
             }
 
@@ -96,7 +95,7 @@ namespace McMovies
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=McMovies}/{action=Index}/{id?}");
             });
 
             SeedData.Initialize(app.ApplicationServices);

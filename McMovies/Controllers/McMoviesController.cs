@@ -136,7 +136,7 @@ namespace McMovies.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(
-            [Bind("ID,Title,ReleaseDate,Cast,RunTime,Review")]int id)
+            [Bind("ID,Title,ReleaseDate,Cast,RunTime,Review,Rating")]int id)
         {
             McMovie movie = _context.McMovie.Single(m => m.ID == id);
             _context.McMovie.Remove(movie);
